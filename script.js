@@ -8,6 +8,20 @@ const validateInput = (el) => {
     }
 }
 
+const debounce =  (func , delay) => {
+    let timer;
+    return function(){
+        clearTimeout(timer)
+        setTimeout(() => {  
+            func();
+        }, delay)
+    }
+}
+
+const debounceSearch = (el) => {
+    debounce(validateInput(el), 1000 )
+}
+
 const generateResults = (searchValue, inputField) => {
     fetch(
         "https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch="
